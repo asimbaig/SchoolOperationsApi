@@ -1,0 +1,42 @@
+﻿@model DatabaseLayer.Models.AssessmentModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AssessmentModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageFileUrl.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageFileUrl.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssessmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssessmentDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AssessmentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

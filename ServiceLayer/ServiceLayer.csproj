@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C64F92F2-F7A2-468D-A7F1-3FE48AB9292E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceLayer</RootNamespace>
+    <AssemblyName>ServiceLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementations\ApiLogService.cs" />
+    <Compile Include="Implementations\AssessmentService.cs" />
+    <Compile Include="Implementations\AttendanceService.cs" />
+    <Compile Include="Implementations\BaseService.cs" />
+    <Compile Include="Implementations\BookService.cs" />
+    <Compile Include="Implementations\BookTransactionService.cs" />
+    <Compile Include="Implementations\EventService.cs" />
+    <Compile Include="Implementations\HomeworkService.cs" />
+    <Compile Include="Implementations\ImageFileTypeService.cs" />
+    <Compile Include="Implementations\ImageFileUrlService.cs" />
+    <Compile Include="Implementations\OperationalStaffService.cs" />
+    <Compile Include="Implementations\ParentService.cs" />
+    <Compile Include="Implementations\SchoolService.cs" />
+    <Compile Include="Implementations\StandardService.cs" />
+    <Compile Include="Implementations\StudentService.cs" />
+    <Compile Include="Implementations\SubjectService.cs" />
+    <Compile Include="Implementations\TeacherService.cs" />
+    <Compile Include="Implementations\YearService.cs" />
+    <Compile Include="Interfaces\IApiLogService.cs" />
+    <Compile Include="Interfaces\IAssessmentService.cs" />
+    <Compile Include="Interfaces\IAttendanceService.cs" />
+    <Compile Include="Interfaces\IBookService.cs" />
+    <Compile Include="Interfaces\IBookTransactionService.cs" />
+    <Compile Include="Interfaces\IEventService.cs" />
+    <Compile Include="Interfaces\IHomeworkService.cs" />
+    <Compile Include="Interfaces\IImageFileTypeService.cs" />
+    <Compile Include="Interfaces\IImageFileUrlService.cs" />
+    <Compile Include="Interfaces\IOperationalStaffService.cs" />
+    <Compile Include="Interfaces\IParentService.cs" />
+    <Compile Include="Interfaces\ISchoolService.cs" />
+    <Compile Include="Interfaces\IStandardService.cs" />
+    <Compile Include="Interfaces\IStudentService.cs" />
+    <Compile Include="Interfaces\ISubjectService.cs" />
+    <Compile Include="Interfaces\ITeacherService.cs" />
+    <Compile Include="Interfaces\IYearService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.csproj">
+      <Project>{ffd51439-e277-4fa7-9b98-2b8b45423f19}</Project>
+      <Name>DatabaseLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTOs\DTOs.csproj">
+      <Project>{684adf0c-af81-42a4-a885-bac74c465726}</Project>
+      <Name>DTOs</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

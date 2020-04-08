@@ -1,0 +1,82 @@
+﻿@model DatabaseLayer.Models.ParentModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ParentModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageFileUrl.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageFileUrl.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RelationType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RelationType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentAddress1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentAddress1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentAddress2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentAddress2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentPostCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentPostCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentTelephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentTelephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentEmail)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ParentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
