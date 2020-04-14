@@ -21,5 +21,6 @@ namespace DTOs
         [Required]
         public int StudentId { get; set; }
         public StudentDTO Student { get; set; }
+        public string _StudentName { get; set; }
     }
 }

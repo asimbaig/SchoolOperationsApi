@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -111,11 +112,27 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<BookTransactionModel> GetAllBookTransactions()
+        public IQueryable<BookTransactionDTO> GetAllBookTransactions()
         {
             try
             {
-                return _dbContext.Set<BookTransactionModel>().AsQueryable();
+                //return _dbContext.Set<BookTransactionModel>().AsQueryable();
+                var LQuery = (from bts in _dbContext.BookTransactions
+                              join
+                              bk in _dbContext.Books on bts.BookId equals bk.BookId
+                              join
+                              std in _dbContext.Students on bts.StudentId equals std.StudentId
+                              select new DTOs.BookTransactionDTO
+                              {
+                                  BookTransactionId = bts.BookTransactionId,
+                                  IssueDate = bts.IssueDate,
+                                  ReturnDate = bts.ReturnDate,
+                                  BookId = bk.BookId,
+                                  _BookName = bk.BookName,
+                                  StudentId = std.StudentId,
+                                  _StudentName = std.St_Name
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

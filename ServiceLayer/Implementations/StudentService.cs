@@ -147,15 +147,15 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.StudentRepository.GetAllStudents().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<StudentModel>, List<StudentDTO>>(models);
-                    foreach (var m in temp)
-                    {
-                        m.EventIds = unitOfWork.StudentRepository.GetAllEventsByStudentId(m.StudentId).ToList();
-                        m.BookTransactionIds = unitOfWork.StudentRepository.GetAllBookTransactionsByStudentId(m.StudentId).ToList();
-                        m.AttendanceIds = unitOfWork.StudentRepository.GetAllAttendancesByStudentId(m.StudentId).ToList();
-                        m.ParentIds = unitOfWork.StudentRepository.GetAllParentsByStudentId(m.StudentId).ToList();
-                    }
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<StudentModel>, List<StudentDTO>>(models);
+                    //foreach (var m in models)
+                    //{
+                    //    m.EventIds = unitOfWork.StudentRepository.GetAllEventsByStudentId(m.StudentId).ToList();
+                    //    m.BookTransactionIds = unitOfWork.StudentRepository.GetAllBookTransactionsByStudentId(m.StudentId).ToList();
+                    //    m.AttendanceIds = unitOfWork.StudentRepository.GetAllAttendancesByStudentId(m.StudentId).ToList();
+                    //    m.ParentIds = unitOfWork.StudentRepository.GetAllParentsByStudentId(m.StudentId).ToList();
+                    //}
+                    return models;
                 }
             }
             catch (Exception ex)

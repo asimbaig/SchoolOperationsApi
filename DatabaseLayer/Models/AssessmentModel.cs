@@ -10,8 +10,8 @@ namespace DatabaseLayer.Models
 {
     public class AssessmentModel
     {
-        //[Key]
-        public int AssessmentId { get; private set; }
+        [Key]
+        public int AssessmentId { get;  set; }
         public string AssessmentName { get; set; }
         [Column(TypeName = "datetime2")]
         public Nullable<DateTime> AssessmentDate { get; set; }

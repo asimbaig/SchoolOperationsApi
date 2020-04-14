@@ -30,5 +30,6 @@ namespace DTOs
         [Required]
         public int SchoolId { get; set; }
         public virtual SchoolDTO School { get; set; }
+        public string _SchoolName { get; set; }
     }
 }

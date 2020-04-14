@@ -103,16 +103,16 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.StandardRepository.GetAllStandards().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<StandardModel>, List<StandardDTO>>(models);
-                    foreach (var m in temp)
-                    {
-                        m.SubjectIds = unitOfWork.StandardRepository.GetAllSubjectsByStandardId(m.StandardId).ToList();
-                        m.AssessmentIds = unitOfWork.StandardRepository.GetAllAssessmentsByStandardId(m.StandardId).ToList();
-                        m.HomeworkIds = unitOfWork.StandardRepository.GetAllHomeworksByStandardId(m.StandardId).ToList();
-                        m.StudentIds = unitOfWork.StandardRepository.GetAllStudentsByStandardId(m.StandardId).ToList();
-                        m.TeacherIds = unitOfWork.StandardRepository.GetAllTeachersByStandardId(m.StandardId).ToList();
-                    }
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<StandardModel>, List<StandardDTO>>(models);
+                    //foreach (var m in models)
+                    //{
+                    //    m.SubjectIds = unitOfWork.StandardRepository.GetAllSubjectsByStandardId(m.StandardId).ToList();
+                    //    m.AssessmentIds = unitOfWork.StandardRepository.GetAllAssessmentsByStandardId(m.StandardId).ToList();
+                    //    m.HomeworkIds = unitOfWork.StandardRepository.GetAllHomeworksByStandardId(m.StandardId).ToList();
+                    //    m.StudentIds = unitOfWork.StandardRepository.GetAllStudentsByStandardId(m.StandardId).ToList();
+                    //    m.TeacherIds = unitOfWork.StandardRepository.GetAllTeachersByStandardId(m.StandardId).ToList();
+                    //}
+                    return models;
                 }
             }
             catch (Exception ex)

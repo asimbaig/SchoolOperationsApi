@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -111,11 +112,28 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<ParentModel> GetAllParents()
+        public IQueryable<ParentDTO> GetAllParents()
         {
             try
             {
-                return _dbContext.Set<ParentModel>().AsQueryable();
+                //return _dbContext.Set<ParentModel>().AsQueryable();
+                var LQuery = (from pts in _dbContext.Parents
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on pts.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.ParentDTO
+                              {
+                                  ParentAddress1 = pts.ParentAddress1,
+                                  ParentAddress2 = pts.ParentAddress2,
+                                  ParentEmail = pts.ParentEmail,
+                                  ParentId = pts.ParentId,
+                                  ParentName = pts.ParentName,
+                                  ParentPostCode = pts.ParentPostCode,
+                                  RelationType = pts.RelationType,
+                                  ParentTelephone = pts.ParentTelephone,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  ChildrenNames = pts.Students.Select(x=>x.St_Name).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

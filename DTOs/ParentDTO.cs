@@ -25,5 +25,7 @@ namespace DTOs
 
         public ICollection<int> StudentIds { get; set; }
         public ICollection<StudentDTO> Students { get; set; }
+
+        public ICollection<string> ChildrenNames { get; set; }
     }
 }

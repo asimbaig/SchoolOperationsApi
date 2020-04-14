@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(StandardModel entity);
         bool Exists(Expression<Func<StandardModel, bool>> expression);
         IQueryable<StandardModel> FindStandard(Expression<Func<StandardModel, bool>> expression);
-        IQueryable<StandardModel> GetAllStandards();
+        IQueryable<StandardDTO> GetAllStandards();
         StandardModel GetSingleOrDefaultStandard(Expression<Func<StandardModel, bool>> expression);
         IQueryable<int> GetAllSubjectsByStandardId(int StandardId);
         IQueryable<int> GetAllAssessmentsByStandardId(int StandardId);

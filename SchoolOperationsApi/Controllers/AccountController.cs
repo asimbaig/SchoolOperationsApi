@@ -29,15 +29,17 @@ namespace SchoolOperationsApi.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        //private ApplicationRoleManager _roleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
+        public AccountController(ApplicationUserManager userManager, //ApplicationRoleManager roleManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
+            //RoleManager = roleManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
@@ -52,6 +54,18 @@ namespace SchoolOperationsApi.Controllers
                 _userManager = value;
             }
         }
+
+        //public ApplicationRoleManager RoleManager
+        //{
+        //    get
+        //    {
+        //        return _roleManager ?? Request.GetOwinContext().GetRoleManager<ApplicationRoleManager>();
+        //    }
+        //    private set
+        //    {
+        //        _roleManager = value;
+        //    }
+        //}
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
@@ -104,7 +118,6 @@ namespace SchoolOperationsApi.Controllers
             {
                 return null;
             }
-
             List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
 
             foreach (IdentityUserLogin linkedAccount in user.Logins)
@@ -338,7 +351,7 @@ namespace SchoolOperationsApi.Controllers
             return logins;
         }
 
-        // POST api/Account/EmpRegister
+        // POST api/Account/RegisterStudent
         [AllowAnonymous]
         [Route("RegisterStudent")]
         public async Task<IHttpActionResult> RegisterStudent(StudentRegisterBindingModel model)
@@ -352,6 +365,10 @@ namespace SchoolOperationsApi.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
+            var newUser = UserManager.FindByEmail(model.Email);
+
+            UserManager.AddToRoles(newUser.Id, new string[] { "Student" });
+            
             int StdId = 0;
             if (result.Succeeded)
             {
@@ -379,7 +396,7 @@ namespace SchoolOperationsApi.Controllers
             return Ok(StdId);
         }
 
-        // POST api/Account/ThrRegister
+        // POST api/Account/RegisterTeacher
         [AllowAnonymous]
         [Route("RegisterTeacher")]
         public async Task<IHttpActionResult> RegisterTeacher(TeacherRegisterBindingModel model)
@@ -393,12 +410,17 @@ namespace SchoolOperationsApi.Controllers
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
+            var newUser = UserManager.FindByEmail(model.Email);
+
+            UserManager.AddToRoles(newUser.Id, new string[] { "Teacher" });
+
             int TrId = 0;
             if (result.Succeeded)
             {
                 TeacherDTO tr = new TeacherDTO()
                 {
                     TeacherName = model.FirstName + " " + model.LastName,
+                    StartDate = model.StartDate,
                     Tr_Address1 = model.Tr_Address1,
                     Tr_Address2 = model.Tr_Address2,
                     Tr_PostCode = model.Tr_PostCode,
@@ -418,7 +440,7 @@ namespace SchoolOperationsApi.Controllers
             return Ok(TrId);
         }
 
-        // POST api/Account/Register
+        // POST api/Account/RegisterParent
         [AllowAnonymous]
         [Route("RegisterParent")]
         public async Task<IHttpActionResult> RegisterParent(ParentRegisterBindingModel model)
@@ -431,6 +453,10 @@ namespace SchoolOperationsApi.Controllers
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            var newUser = UserManager.FindByEmail(model.Email);
+
+            UserManager.AddToRoles(newUser.Id, new string[] { "Parent" });
 
             int PrId = 0;
             if (result.Succeeded)
@@ -458,7 +484,7 @@ namespace SchoolOperationsApi.Controllers
             return Ok(PrId);
         }
 
-        // POST api/Account/Register
+        // POST api/Account/RegisterOperationalStaff
         [AllowAnonymous]
         [Route("RegisterOperationalStaff")]
         public async Task<IHttpActionResult> RegisterOperationalStaff(OperationalStaffRegisterBindingModel model)
@@ -483,7 +509,7 @@ namespace SchoolOperationsApi.Controllers
                 {
                     OpStaffName = model.FirstName + " " + model.LastName,
                     OpStaffRole = model.OpStaffRole,
-                    StartDate = DateTime.Now,
+                    StartDate = model.StartDate,
                     OpStaffAddress1 = model.OpStaffAddress1,
                     OpStaffAddress2 = model.OpStaffAddress2,
                     OpStaffPostCode = model.OpStaffPostCode,

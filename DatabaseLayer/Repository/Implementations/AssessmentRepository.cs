@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -39,7 +40,7 @@ namespace DatabaseLayer.Repository.Implementations
             {
                 entity.Standard = _dbContext.Standards.FirstOrDefault(x => x.StandardId == entity.StandardId);
 
-                var currentEntity = _dbContext.Set<AssessmentModel>().AsQueryable().FirstOrDefault(x => x.AssessmentName == entity.AssessmentName);
+                var currentEntity = _dbContext.Set<AssessmentModel>().AsQueryable().FirstOrDefault(x => x.AssessmentId == entity.AssessmentId);
                 if (currentEntity == null)
                 {
                     return false;
@@ -107,11 +108,28 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<AssessmentModel> GetAllAssessments()
+        public IQueryable<AssessmentDTO> GetAllAssessments()
         {
             try
             {
-                return _dbContext.Set<AssessmentModel>().AsQueryable();
+                //return _dbContext.Set<AssessmentModel>().AsQueryable();
+                var LQuery =   (from ass in _dbContext.Assessments
+                              join 
+                              stand in _dbContext.Standards on ass.StandardId equals stand.StandardId
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on ass.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.AssessmentDTO
+                              {
+                                  AssessmentId = ass.AssessmentId,
+                                  AssessmentName = ass.AssessmentName,
+                                  AssessmentDate = ass.AssessmentDate,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  StandardId = stand.StandardId,
+                                  _StandardName = stand.StandardName
+                              }).AsQueryable();
+                return LQuery;
+
+
             }
             catch (Exception ex)
             {

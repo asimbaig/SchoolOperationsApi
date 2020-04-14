@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(EventModel entity);
         bool Exists(Expression<Func<EventModel, bool>> expression);
         IQueryable<EventModel> FindEvent(Expression<Func<EventModel, bool>> expression);
-        IQueryable<EventModel> GetAllEvents();
+        IQueryable<EventDTO> GetAllEvents();
         EventModel GetSingleOrDefaultEvent(Expression<Func<EventModel, bool>> expression);
         IQueryable<int> GetAllStudentsByEventId(int EventId);
     }

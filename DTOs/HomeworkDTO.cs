@@ -22,5 +22,6 @@ namespace DTOs
 
         public int StandardId { get; set; }
         public StandardDTO Standard { get; set; }
+        public string _StandardName { get; set; }
     }
 }

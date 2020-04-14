@@ -103,12 +103,12 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.YearRepository.GetAllYears().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<YearModel>, List<YearDTO>>(models);
-                    foreach (var m in temp)
-                    {
-                        m.StandardIds = unitOfWork.YearRepository.GetAllStandardsByYearId(m.YearId).ToList();
-                    }
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<YearModel>, List<YearDTO>>(models);
+                    //foreach (var m in temp)
+                    //{
+                    //    m.StandardIds = unitOfWork.YearRepository.GetAllStandardsByYearId(m.YearId).ToList();
+                    //}
+                    return models;
                 }
             }
             catch (Exception ex)

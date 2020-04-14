@@ -111,8 +111,8 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.BookTransactionRepository.GetAllBookTransactions().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<BookTransactionModel>, List<BookTransactionDTO>>(models);
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<BookTransactionModel>, List<BookTransactionDTO>>(models);
+                    return models;
                 }
             }
             catch (Exception ex)

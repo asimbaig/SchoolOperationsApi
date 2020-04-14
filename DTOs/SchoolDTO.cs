@@ -24,5 +24,8 @@ namespace DTOs
         public ICollection<int> OperationalStaffIds { get; set; }
         public ICollection<StandardDTO> Standards { get; set; }
         public ICollection<OperationalStaffDTO> OperationalStaffs { get; set; }
+
+        public ICollection<string> _StandardNames { get; set; }
+        public ICollection<string> _StaffNames { get; set; }
     }
 }

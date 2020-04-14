@@ -140,8 +140,8 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.AttendanceRepository.GetAllAttendances().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<AttendanceModel>, List<AttendanceDTO>>(models);
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<AttendanceModel>, List<AttendanceDTO>>(models);
+                    return models;
                 }
             }
             catch (Exception ex)

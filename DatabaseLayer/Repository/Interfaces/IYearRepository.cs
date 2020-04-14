@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(YearModel entity);
         bool Exists(Expression<Func<YearModel, bool>> expression);
         IQueryable<YearModel> FindYear(Expression<Func<YearModel, bool>> expression);
-        IQueryable<YearModel> GetAllYears();
+        IQueryable<YearDTO> GetAllYears();
         YearModel GetSingleOrDefaultYear(Expression<Func<YearModel, bool>> expression);
         IQueryable<int> GetAllStandardsByYearId(int YearId);
     }

@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -46,9 +47,9 @@ namespace DatabaseLayer.Repository.Implementations
 
                 currentEntity.EventName = entity.EventName;
                 currentEntity.EventDate = entity.EventDate;
-                if (currentEntity.ImageFileUrl != null)
+                if (entity.ImageFileUrl != null)
                 {
-                    currentEntity.ImageFileUrl = entity.ImageFileUrl;
+                    currentEntity.ImageFileUrl.Url = entity.ImageFileUrl.Url;
                 }
                 currentEntity.Location = entity.Location;
 
@@ -106,11 +107,24 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<EventModel> GetAllEvents()
+        public IQueryable<EventDTO> GetAllEvents()
         {
             try
             {
-                return _dbContext.Set<EventModel>().AsQueryable();
+                //return _dbContext.Set<EventModel>().AsQueryable();
+                var LQuery = (from evt in _dbContext.Events
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on evt.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.EventDTO
+                              {
+                                  EventId = evt.EventId,
+                                  EventName = evt.EventName,
+                                  Location = evt.Location,
+                                  EventDate = evt.EventDate,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  _StudentNames = evt.Students.Select(x => x.St_Name).ToList(),
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

@@ -140,13 +140,13 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.SchoolRepository.GetAllSchools().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<SchoolModel>, List<SchoolDTO>>(models);
-                    foreach (var m in temp)
-                    {
-                        m.StandardIds = unitOfWork.SchoolRepository.GetAllStandardsBySchoolId(m.SchoolId).ToList();
-                        m.OperationalStaffIds = unitOfWork.SchoolRepository.GetAllOperationalStaffsBySchoolId(m.SchoolId).ToList();
-                    }
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<SchoolModel>, List<SchoolDTO>>(models);
+                    //foreach (var m in models)
+                    //{
+                    //    m.StandardIds = unitOfWork.SchoolRepository.GetAllStandardsBySchoolId(m.SchoolId).ToList();
+                    //    m.OperationalStaffIds = unitOfWork.SchoolRepository.GetAllOperationalStaffsBySchoolId(m.SchoolId).ToList();
+                    //}
+                    return models;
                 }
             }
             catch (Exception ex)

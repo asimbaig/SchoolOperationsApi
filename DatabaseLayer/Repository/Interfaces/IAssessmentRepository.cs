@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(AssessmentModel entity);
         bool Exists(Expression<Func<AssessmentModel, bool>> expression);
         IQueryable<AssessmentModel> FindAssessment(Expression<Func<AssessmentModel, bool>> expression);
-        IQueryable<AssessmentModel> GetAllAssessments();
+        IQueryable<AssessmentDTO> GetAllAssessments();
         AssessmentModel GetSingleOrDefaultAssessment(Expression<Func<AssessmentModel, bool>> expression);
     }
 }

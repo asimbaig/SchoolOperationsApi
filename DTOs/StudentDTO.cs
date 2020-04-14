@@ -10,7 +10,7 @@ namespace DTOs
     {
         public int StudentId { get; set; }
         public string St_Name { get; set; }
-        public DateTime EnrolmentDate { get; set; }
+        public DateTime? EnrolmentDate { get; set; }
         public string St_Address1 { get; set; }
         public string St_Address2 { get; set; }
         public string St_PostCode { get; set; }
@@ -35,5 +35,9 @@ namespace DTOs
         public ICollection<AttendanceDTO> Attendances { get; set; }
         public ICollection<EventDTO> Events { get; set; }
         public ICollection<ParentDTO> Parents { get; set; }
+
+        public string _StandardName { get; set; }
+        public ICollection<string> _EventParticipatings { get; set; }
+        public ICollection<string> _ParentNames { get; set; }
     }
 }

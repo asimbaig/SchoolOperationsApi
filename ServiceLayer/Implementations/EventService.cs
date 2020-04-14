@@ -154,13 +154,13 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.EventRepository.GetAllEvents().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<EventModel>, List<EventDTO>>(models);
+                    //var temp = _Mapper_ToDTO.Map<List<EventModel>, List<EventDTO>>(models);
 
-                    foreach (var m in temp)
-                    {
-                        m.StudentIds = unitOfWork.EventRepository.GetAllStudentsByEventId(m.EventId).ToList();
-                    }
-                    return temp;
+                    //foreach (var m in temp)
+                    //{
+                    //    m.StudentIds = unitOfWork.EventRepository.GetAllStudentsByEventId(m.EventId).ToList();
+                    //}
+                    return models;
                 }
             }
             catch (Exception ex)

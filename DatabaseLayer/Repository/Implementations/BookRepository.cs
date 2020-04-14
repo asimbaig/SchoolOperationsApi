@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -40,7 +41,7 @@ namespace DatabaseLayer.Repository.Implementations
             {
                 entity.Subject = _dbContext.Subjects.FirstOrDefault(x => x.SubjectId == entity.SubjectId);
 
-                var currentEntity = _dbContext.Set<BookModel>().AsQueryable().FirstOrDefault(x => x.BookName == entity.BookName);
+                var currentEntity = _dbContext.Set<BookModel>().AsQueryable().FirstOrDefault(x => x.BookId == entity.BookId);
                 if (currentEntity == null)
                 {
                     return false;
@@ -107,11 +108,27 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<BookModel> GetAllBooks()
+        public IQueryable<BookDTO> GetAllBooks()
         {
             try
             {
-                return _dbContext.Set<BookModel>().AsQueryable();
+                //return _dbContext.Set<BookModel>().AsQueryable();
+                //return _dbContext.Set<ParentModel>().AsQueryable();
+                var LQuery = (from bks in _dbContext.Books
+                              join
+                              sub in _dbContext.Subjects on bks.SubjectId  equals sub.SubjectId
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on bks.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.BookDTO
+                              {
+                                  BookId = bks.BookId,
+                                  BookName = bks.BookName,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  SubjectId = sub.SubjectId,
+                                  _SubjectName = sub.SubjectName,
+                                  _BookTransactions = bks.BookTransactions.Select(x =>"Issue: " + x.IssueDate + ", Return: " + x.ReturnDate).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

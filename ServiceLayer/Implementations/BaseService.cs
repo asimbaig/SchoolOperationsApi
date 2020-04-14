@@ -34,7 +34,14 @@ namespace ServiceLayer.Implementations
                 await unitOfWork.SaveChangesAsync();
             }
         }
-
+        public void SetAutoMapper_ExceptionLogger()
+        {
+            MapperConfiguration _mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ExceptionLoggerDTO, ExceptionLogger>();
+            });
+            _Mapper_ToModel = _mapperConfig.CreateMapper();
+        }
         public void SetAutoMapper_Year()
         {
             MapperConfiguration _mapperConfig = new MapperConfiguration(cfg =>
@@ -72,6 +79,7 @@ namespace ServiceLayer.Implementations
                 cfg.CreateMap<TeacherModel, TeacherDTO>()
                     .ForMember(d => d.TeacherId, s => s.MapFrom(m => m.TeacherId))
                     .ForMember(d => d.TeacherName, s => s.MapFrom(m => m.TeacherName))
+                    .ForMember(d => d.StartDate, s => s.MapFrom(m => m.StartDate))
                     .ForMember(d => d.Tr_Address1, s => s.MapFrom(m => m.Tr_Address1))
                     .ForMember(d => d.Tr_Address2, s => s.MapFrom(m => m.Tr_Address2))
                     .ForMember(d => d.Tr_PostCode, s => s.MapFrom(m => m.Tr_PostCode))

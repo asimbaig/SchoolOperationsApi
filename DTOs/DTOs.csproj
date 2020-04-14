@@ -48,6 +48,7 @@
     <Compile Include="BookDTO.cs" />
     <Compile Include="BookTransactionDTO.cs" />
     <Compile Include="EventDTO.cs" />
+    <Compile Include="ExceptionLoggerDTO.cs" />
     <Compile Include="HomeworkDTO.cs" />
     <Compile Include="ImageFileTypeDTO.cs" />
     <Compile Include="ImageFileUrlDTO.cs" />
@@ -60,12 +61,6 @@
     <Compile Include="SubjectDTO.cs" />
     <Compile Include="TeacherDTO.cs" />
     <Compile Include="YearDTO.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.csproj">
-      <Project>{FFD51439-E277-4FA7-9B98-2B8B45423F19}</Project>
-      <Name>DatabaseLayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

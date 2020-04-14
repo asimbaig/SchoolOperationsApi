@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(ParentModel entity);
         bool Exists(Expression<Func<ParentModel, bool>> expression);
         IQueryable<ParentModel> FindParent(Expression<Func<ParentModel, bool>> expression);
-        IQueryable<ParentModel> GetAllParents();
+        IQueryable<ParentDTO> GetAllParents();
         ParentModel GetSingleOrDefaultParent(Expression<Func<ParentModel, bool>> expression);
         IQueryable<int> GetAllStudentsByParentId(int ParentId);
     }

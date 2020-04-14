@@ -26,7 +26,7 @@ namespace SchoolOperationsApi.Models
         [Required]
         public string FirstName { get; set; }
 
-        [Required]
+
         public string LastName { get; set; }
 
         public DateTime EnrolmentDate { get; set; }
@@ -65,12 +65,9 @@ namespace SchoolOperationsApi.Models
         [Required]
         public string FirstName { get; set; }
 
-        [Required]
         public string LastName { get; set; }
 
-
-
-        public DateTime JoinDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         public string Tr_Address1 { get; set; }
 
@@ -104,12 +101,11 @@ namespace SchoolOperationsApi.Models
         [Required]
         public string FirstName { get; set; }
 
-        [Required]
         public string LastName { get; set; }
 
         public string RelationType { get; set; }//Mother or Father etc
 
-        public DateTime JoinDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         public string ParentAddress1 { get; set; }
 
@@ -143,7 +139,6 @@ namespace SchoolOperationsApi.Models
         [Required]
         public string FirstName { get; set; }
 
-        [Required]
         public string LastName { get; set; }
 
         public string OpStaffRole { get; set; }

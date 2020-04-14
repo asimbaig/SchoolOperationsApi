@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -54,6 +55,7 @@ namespace DatabaseLayer.Repository.Implementations
                 currentEntity.St_Telephone = entity.St_Telephone;
                 currentEntity.EnrolmentDate = entity.EnrolmentDate;
                 currentEntity.St_Telephone = entity.St_Telephone;
+                currentEntity.StandardId = entity.StandardId;
 
                 if (entity.ImageFileUrl != null)
                 {
@@ -114,11 +116,33 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<StudentModel> GetAllStudents()
+        public IQueryable<StudentDTO> GetAllStudents()
         {
             try
             {
-                return _dbContext.Set<StudentModel>().AsQueryable();
+                //return _dbContext.Set<StudentModel>().AsQueryable();
+                var LQuery = (from std in _dbContext.Students
+                              join
+                              stand in _dbContext.Standards on std.StandardId equals stand.StandardId
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on std.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.StudentDTO
+                              {
+                                  St_Address1 = std.St_Address1,
+                                  St_Address2 = std.St_Address2,
+                                  St_Email = std.St_Email,
+                                  StudentId = std.StudentId,
+                                  St_Name = std.St_Name,
+                                  St_PostCode = std.St_PostCode,
+                                  EnrolmentDate = std.EnrolmentDate,
+                                  St_Telephone = std.St_Telephone,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  StandardId = stand.StandardId,
+                                  _StandardName = stand.StandardName,
+                                  _EventParticipatings = std.Events.Select(x => x.EventName).ToList(),
+                                  _ParentNames = std.Parents.Select(x => x.ParentName).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

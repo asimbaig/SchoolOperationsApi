@@ -13,5 +13,7 @@ namespace DTOs
 
         public ICollection<int> StandardIds { get; set; }
         public ICollection<StandardDTO> Standards { get; set; }
+
+        public ICollection<string> _StandardNames { get; set; }
     }
 }

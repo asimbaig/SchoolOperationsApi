@@ -139,8 +139,8 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.OperationalStaffRepository.GetAllOperationalStaffs().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<OperationalStaffModel>, List<OperationalStaffDTO>>(models);
-                    return temp;
+                    ///var temp = _Mapper_ToDTO.Map<List<OperationalStaffModel>, List<OperationalStaffDTO>>(models);
+                    return models;
                 }
             }
             catch (Exception ex)

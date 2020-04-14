@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(SchoolModel entity);
         bool Exists(Expression<Func<SchoolModel, bool>> expression);
         IQueryable<SchoolModel> FindSchool(Expression<Func<SchoolModel, bool>> expression);
-        IQueryable<SchoolModel> GetAllSchools();
+        IQueryable<SchoolDTO> GetAllSchools();
         SchoolModel GetSingleOrDefaultSchool(Expression<Func<SchoolModel, bool>> expression);
         IQueryable<int> GetAllStandardsBySchoolId(int SchoolId);
         IQueryable<int> GetAllOperationalStaffsBySchoolId(int SchoolId);

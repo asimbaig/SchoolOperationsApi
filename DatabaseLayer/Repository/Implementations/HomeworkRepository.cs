@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -47,6 +48,7 @@ namespace DatabaseLayer.Repository.Implementations
                 }
                 currentEntity.HomeworkName = entity.HomeworkName;
                 currentEntity.IssueDate = entity.IssueDate;
+                currentEntity.DueDate = entity.DueDate;
                 currentEntity.StandardId = entity.StandardId;
                 currentEntity.Standard = entity.Standard;
 
@@ -109,11 +111,27 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<HomeworkModel> GetAllHomeworks()
+        public IQueryable<HomeworkDTO> GetAllHomeworks()
         {
             try
             {
-                return _dbContext.Set<HomeworkModel>().AsQueryable();
+                //return _dbContext.Set<HomeworkModel>().AsQueryable();
+                var LQuery = (from hm in _dbContext.Homeworks
+                              join
+                              stand in _dbContext.Standards on hm.StandardId equals stand.StandardId
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on hm.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.HomeworkDTO
+                              {
+                                  HomeworkId = hm.HomeworkId,
+                                  HomeworkName = hm.HomeworkName,
+                                  IssueDate = hm.IssueDate,
+                                  DueDate = hm.DueDate,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  StandardId = stand.StandardId,
+                                  _StandardName = stand.StandardName
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

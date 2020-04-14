@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -100,11 +101,22 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<SubjectModel> GetAllSubjects()
+        public IQueryable<SubjectDTO> GetAllSubjects()
         {
             try
             {
-                return _dbContext.Set<SubjectModel>().AsQueryable();
+                //return _dbContext.Set<SubjectModel>().AsQueryable();
+                var LQuery = (from sub in _dbContext.Subjects
+                              select new DTOs.SubjectDTO
+                              {
+                                  SubjectId = sub.SubjectId,
+                                  SubjectName = sub.SubjectName,
+                                  _BookNames = sub.Books.Select(x => x.BookName).ToList(),
+                                  _StandardNames = sub.Standards.Select(x => x.StandardName).ToList(),
+                                  _TeacherNames = sub.Teachers.Select(x => x.TeacherName).ToList()
+                                  
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

@@ -11,7 +11,7 @@ namespace DTOs
     {
         public int BookTransactionId { get; set; }
         [Required]
-        public DateTime IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         [Required]
         public int BookId { get; set; }
@@ -20,5 +20,8 @@ namespace DTOs
 
         public BookDTO Book { get; set; }
         public StudentDTO Student { get; set; }
+
+        public string _BookName { get; set; }
+        public string _StudentName { get; set; }
     }
 }

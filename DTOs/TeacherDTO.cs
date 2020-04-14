@@ -16,6 +16,8 @@ namespace DTOs
         public string Tr_Telephone { get; set; }
         public string Tr_Email { get; set; }
 
+        public Nullable<DateTime> StartDate { get; set; }
+
         public string UserId { get; set; }
 
         public int ImageFileUrlId { get; set; }
@@ -27,5 +29,10 @@ namespace DTOs
 
         public ICollection<StandardDTO> Standards { get; set; }
         public ICollection<SubjectDTO> Subjects { get; set; }
+
+        public ICollection<string> _StandardNames { get; set; }
+        public ICollection<string> _SubjectNames { get; set; }
+
+
     }
 }

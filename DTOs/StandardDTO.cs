@@ -28,5 +28,13 @@ namespace DTOs
         public ICollection<HomeworkDTO> Homeworks { get; set; }
         public ICollection<StudentDTO> Students { get; set; }
         public ICollection<TeacherDTO> Teachers { get; set; }
+
+        public string _NameSchool { get; set; }
+        public string _NameYear { get; set; }
+        public ICollection<string> _NameSubjects { get; set; }
+        public ICollection<string> _NameAssessments { get; set; }
+        public ICollection<string> _NameHomeworks { get; set; }
+        public ICollection<string> _NameStudents { get; set; }
+        public ICollection<string> _NameTeachers { get; set; }
     }
 }

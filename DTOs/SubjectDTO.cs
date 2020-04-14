@@ -18,5 +18,9 @@ namespace DTOs
         public ICollection<StandardDTO> Standards { get; set; }
         public ICollection<BookDTO> Books { get; set; }
         public ICollection<TeacherDTO> Teachers { get; set; }
+
+        public ICollection<string> _StandardNames { get; set; }
+        public ICollection<string> _BookNames { get; set; }
+        public ICollection<string> _TeacherNames { get; set; }
     }
 }

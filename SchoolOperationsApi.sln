@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.1062
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOperationsApi", "SchoolOperationsApi\SchoolOperationsApi.csproj", "{79637ED0-5A5D-4AFE-889F-C0C9B07CE8F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOperationsApi.Tests", "SchoolOperationsApi.Tests\SchoolOperationsApi.Tests.csproj", "{477E44A0-E950-4A37-8AAA-5A1C87911531}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseLayer", "DatabaseLayer\DatabaseLayer.csproj", "{FFD51439-E277-4FA7-9B98-2B8B45423F19}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{C64F92F2-F7A2-468D-A7F1-3FE48AB9292E}"
@@ -23,10 +21,6 @@ Global
 		{79637ED0-5A5D-4AFE-889F-C0C9B07CE8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79637ED0-5A5D-4AFE-889F-C0C9B07CE8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79637ED0-5A5D-4AFE-889F-C0C9B07CE8F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{477E44A0-E950-4A37-8AAA-5A1C87911531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{477E44A0-E950-4A37-8AAA-5A1C87911531}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{477E44A0-E950-4A37-8AAA-5A1C87911531}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{477E44A0-E950-4A37-8AAA-5A1C87911531}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFD51439-E277-4FA7-9B98-2B8B45423F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFD51439-E277-4FA7-9B98-2B8B45423F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFD51439-E277-4FA7-9B98-2B8B45423F19}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(StudentModel entity);
         bool Exists(Expression<Func<StudentModel, bool>> expression);
         IQueryable<StudentModel> FindStudent(Expression<Func<StudentModel, bool>> expression);
-        IQueryable<StudentModel> GetAllStudents();
+        IQueryable<StudentDTO> GetAllStudents();
         StudentModel GetSingleOrDefaultStudent(Expression<Func<StudentModel, bool>> expression);
         IQueryable<int> GetAllEventsByStudentId(int StudentId);
         IQueryable<int> GetAllBookTransactionsByStudentId(int StudentId);

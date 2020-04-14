@@ -140,8 +140,8 @@ namespace ServiceLayer.Implementations
                 {
                     //var models = unitOfWork.AssessmentRepository.GetAllAssessments().ToList();
                     var models = await Task.Run(() => unitOfWork.AssessmentRepository.GetAllAssessments().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<AssessmentModel>, List<AssessmentDTO>>(models);
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<AssessmentModel>, List<AssessmentDTO>>(models);
+                    return models;
                 }
             }
             catch (Exception ex)

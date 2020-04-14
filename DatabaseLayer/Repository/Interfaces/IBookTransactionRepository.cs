@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(BookTransactionModel entity);
         bool Exists(Expression<Func<BookTransactionModel, bool>> expression);
         IQueryable<BookTransactionModel> FindBookTransaction(Expression<Func<BookTransactionModel, bool>> expression);
-        IQueryable<BookTransactionModel> GetAllBookTransactions();
+        IQueryable<BookTransactionDTO> GetAllBookTransactions();
         BookTransactionModel GetSingleOrDefaultBookTransaction(Expression<Func<BookTransactionModel, bool>> expression);
     }
 }

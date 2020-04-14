@@ -23,5 +23,8 @@ namespace DTOs
 
         public ICollection<int> BookTransactionIds { get; set; }
         public ICollection<BookTransactionDTO> BookTransactions { get; set; }
+
+        public string _SubjectName { get; set; }
+        public ICollection<string> _BookTransactions { get; set; }
     }
 }

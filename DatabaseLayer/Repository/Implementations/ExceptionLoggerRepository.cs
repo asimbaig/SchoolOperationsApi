@@ -22,7 +22,7 @@ namespace DatabaseLayer.Repository.Implementations
 
         public void Add(ExceptionLogger entity)
         {
-                _dbContext.Entry(entity).State = entity.Id == 0 ? EntityState.Added : EntityState.Modified;
+            _dbContext.Entry(entity).State = EntityState.Added;
         }
 
         public void Update(ExceptionLogger entity)

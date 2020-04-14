@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -100,11 +101,19 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<YearModel> GetAllYears()
+        public IQueryable<YearDTO> GetAllYears()
         {
             try
             {
-                return _dbContext.Set<YearModel>().AsQueryable();
+                //return _dbContext.Set<YearModel>().AsQueryable();
+                var LQuery = (from yrs in _dbContext.Years
+                              select new DTOs.YearDTO
+                              {
+                                  YearId = yrs.YearId,
+                                  year = yrs.year,
+                                  _StandardNames = yrs.Standards.Select(x => x.StandardName).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

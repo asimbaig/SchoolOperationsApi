@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -112,11 +113,31 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<StandardModel> GetAllStandards()
+        public IQueryable<StandardDTO> GetAllStandards()
         {
             try
             {
-                return _dbContext.Set<StandardModel>().AsQueryable();
+                //return _dbContext.Set<StandardModel>().AsQueryable();
+                var LQuery = (from std in _dbContext.Standards
+                              join
+                              sch in _dbContext.Schools on std.SchoolId equals sch.SchoolId
+                              join
+                              yrs in _dbContext.Years on std.YearId equals yrs.YearId
+                              select new DTOs.StandardDTO
+                              {
+                                  StandardId = std.StandardId,
+                                  StandardName = std.StandardName,
+                                  SchoolId = sch.SchoolId,
+                                  _NameSchool = sch.SchoolName,
+                                  YearId = yrs.YearId,
+                                  _NameYear = yrs.year,
+                                  _NameAssessments = std.Assessments.Select(x => x.AssessmentName).ToList(),
+                                  _NameHomeworks = std.Homeworks.Select(x => x.HomeworkName).ToList(),
+                                  _NameStudents = std.Students.Select(x => x.St_Name).ToList(),
+                                  _NameSubjects = std.Subjects.Select(x => x.SubjectName).ToList(),
+                                  _NameTeachers = std.Teachers.Select(x => x.TeacherName).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

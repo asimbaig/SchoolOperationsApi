@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -110,11 +111,28 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<SchoolModel> GetAllSchools()
+        public IQueryable<SchoolDTO> GetAllSchools()
         {
             try
             {
-                return _dbContext.Set<SchoolModel>().AsQueryable();
+                //return _dbContext.Set<SchoolModel>().AsQueryable();
+                var LQuery = (from shl in _dbContext.Schools
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on shl.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.SchoolDTO
+                              {
+                                  SchoolAddress1 = shl.SchoolAddress1,
+                                  SchoolAddress2 = shl.SchoolAddress2,
+                                  SchoolWebsite = shl.SchoolWebsite,
+                                  SchoolId = shl.SchoolId,
+                                  SchoolName = shl.SchoolName,
+                                  SchoolPostCode = shl.SchoolPostCode,
+                                  SchoolTelephone = shl.SchoolTelephone,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  _StandardNames = shl.Standards.Select(x => x.StandardName).ToList(),
+                                  _StaffNames = shl.OperationalStaffs.Select(x => x.OpStaffName).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

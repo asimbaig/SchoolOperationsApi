@@ -201,7 +201,9 @@
     <Compile Include="UnitOfWork\UnitOfWorkFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -210,6 +212,12 @@
     <EmbeddedResource Include="Migrations\202004072229264_FirstMigration.resx">
       <DependentUpon>202004072229264_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTOs\DTOs.csproj">
+      <Project>{684adf0c-af81-42a4-a885-bac74c465726}</Project>
+      <Name>DTOs</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

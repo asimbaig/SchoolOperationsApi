@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(SubjectModel entity);
         bool Exists(Expression<Func<SubjectModel, bool>> expression);
         IQueryable<SubjectModel> FindSubject(Expression<Func<SubjectModel, bool>> expression);
-        IQueryable<SubjectModel> GetAllSubjects();
+        IQueryable<SubjectDTO> GetAllSubjects();
         SubjectModel GetSingleOrDefaultSubject(Expression<Func<SubjectModel, bool>> expression);
         IQueryable<int> GetAllStandardsBySubjectId(int SubjectId);
         IQueryable<int> GetAllBooksBySubjectId(int SubjectId);

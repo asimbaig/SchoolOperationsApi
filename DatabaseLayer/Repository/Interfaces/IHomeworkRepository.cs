@@ -1,4 +1,5 @@
 ﻿using DatabaseLayer.Models;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace DatabaseLayer.Repository.Interfaces
         void Remove(HomeworkModel entity);
         bool Exists(Expression<Func<HomeworkModel, bool>> expression);
         IQueryable<HomeworkModel> FindHomework(Expression<Func<HomeworkModel, bool>> expression);
-        IQueryable<HomeworkModel> GetAllHomeworks();
+        IQueryable<HomeworkDTO> GetAllHomeworks();
         HomeworkModel GetSingleOrDefaultHomework(Expression<Func<HomeworkModel, bool>> expression);
     }
 }

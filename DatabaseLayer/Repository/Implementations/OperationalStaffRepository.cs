@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -47,6 +48,8 @@ namespace DatabaseLayer.Repository.Implementations
                 currentEntity.OpStaffName = entity.OpStaffName;
                 currentEntity.OpStaffAddress1 = entity.OpStaffAddress1;
                 currentEntity.OpStaffAddress2 = entity.OpStaffAddress2;
+                currentEntity.StartDate = entity.StartDate;
+                currentEntity.OpStaffRole = entity.OpStaffRole;
                 //currentEntity.OpStaffEmail = entity.OpStaffEmail;
                 currentEntity.OpStaffPostCode = entity.OpStaffPostCode;
                 currentEntity.OpStaffTelephone = entity.OpStaffTelephone;
@@ -114,11 +117,32 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<OperationalStaffModel> GetAllOperationalStaffs()
+        public IQueryable<OperationalStaffDTO> GetAllOperationalStaffs()
         {
             try
             {
-                return _dbContext.Set<OperationalStaffModel>().AsQueryable();
+                //return _dbContext.Set<OperationalStaffModel>().AsQueryable();
+                var LQuery = (from ops in _dbContext.OperationalStaffs
+                              join
+                              sch in _dbContext.Schools on ops.SchoolId equals sch.SchoolId
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on ops.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.OperationalStaffDTO
+                              {
+                                  OpStaffAddress1 = ops.OpStaffAddress1,
+                                  OpStaffAddress2 = ops.OpStaffAddress2,
+                                  OpStaffEmail = ops.OpStaffEmail,
+                                  OpStaffId = ops.OpStaffId,
+                                  OpStaffName = ops.OpStaffName,
+                                  OpStaffPostCode = ops.OpStaffPostCode,
+                                  OpStaffRole = ops.OpStaffRole,
+                                  OpStaffTelephone = ops.OpStaffTelephone,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  SchoolId = sch.SchoolId,
+                                  _SchoolName = sch.SchoolName,
+                                  StartDate = ops.StartDate
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

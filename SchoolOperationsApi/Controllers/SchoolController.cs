@@ -10,6 +10,7 @@ using System.Web.Http.Description;
 namespace SchoolOperationsApi.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
+    //[Authorize]
     public class SchoolController : BaseController
     {
         private readonly ISchoolService SchoolService;
@@ -28,9 +29,9 @@ namespace SchoolOperationsApi.Controllers
         {
             var collection = await (SchoolService.GetAllSchool());
 
-            if (collection != null)
-                return Ok(collection);
-            else
+            //if (collection != null)
+            //    return Ok(collection);
+            //else
                 return NotFound();
         }
 

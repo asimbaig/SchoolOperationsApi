@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using SchoolOperationsApi.Common;
@@ -27,11 +28,14 @@ namespace SchoolOperationsApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
             //Registering Custom Exception Filter
             config.Filters.Add(new CustomExceptionFilter());
 
             //Registering RequestResponseHandler
-            //config.MessageHandlers.Add(new RequestResponseHandler());
+            config.MessageHandlers.Add(new RequestResponseHandler());
         }
     }
 }

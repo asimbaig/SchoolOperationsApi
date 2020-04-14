@@ -139,8 +139,8 @@ namespace ServiceLayer.Implementations
                 using (var unitOfWork = unitOfWorkFactory.Create())
                 {
                     var models = await Task.Run(() => unitOfWork.HomeworkRepository.GetAllHomeworks().ToList());
-                    var temp = _Mapper_ToDTO.Map<List<HomeworkModel>, List<HomeworkDTO>>(models);
-                    return temp;
+                    //var temp = _Mapper_ToDTO.Map<List<HomeworkModel>, List<HomeworkDTO>>(models);
+                    return models;
                 }
             }
             catch (Exception ex)

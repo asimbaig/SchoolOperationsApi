@@ -1,6 +1,7 @@
 ﻿using DatabaseLayer.Context;
 using DatabaseLayer.Models;
 using DatabaseLayer.Repository.Interfaces;
+using DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -45,6 +46,7 @@ namespace DatabaseLayer.Repository.Implementations
                 }
 
                 currentEntity.TeacherName = entity.TeacherName;
+                currentEntity.StartDate = entity.StartDate;
                 currentEntity.Tr_Address1 = entity.Tr_Address1;
                 currentEntity.Tr_Address2 = entity.Tr_Address2;
                 currentEntity.Tr_PostCode = entity.Tr_PostCode;
@@ -109,11 +111,29 @@ namespace DatabaseLayer.Repository.Implementations
             }
         }
 
-        public IQueryable<TeacherModel> GetAllTeachers()
+        public IQueryable<TeacherDTO> GetAllTeachers()
         {
             try
             {
-                return _dbContext.Set<TeacherModel>().AsQueryable();
+                //return _dbContext.Set<TeacherModel>().AsQueryable();
+                var LQuery = (from tr in _dbContext.Teachers
+                              join
+                              imgfilurl in _dbContext.ImageFileUrls on tr.ImageFileUrl.ImageFileUrlId equals imgfilurl.ImageFileUrlId
+                              select new DTOs.TeacherDTO
+                              {
+                                  Tr_Address1 = tr.Tr_Address1,
+                                  Tr_Address2 = tr.Tr_Address2,
+                                  Tr_Email = tr.Tr_Email,
+                                  TeacherId = tr.TeacherId,
+                                  TeacherName = tr.TeacherName,
+                                  StartDate = tr.StartDate,
+                                  Tr_PostCode = tr.Tr_PostCode,
+                                  Tr_Telephone = tr.Tr_Telephone,
+                                  _ImageFileUrl = imgfilurl.Url,
+                                  _StandardNames = tr.Standards.Select(x => x.StandardName).ToList(),
+                                  _SubjectNames = tr.Subjects.Select(x => x.SubjectName).ToList()
+                              }).AsQueryable();
+                return LQuery;
             }
             catch (Exception ex)
             {

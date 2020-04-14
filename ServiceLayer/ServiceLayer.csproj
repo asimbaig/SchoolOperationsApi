@@ -51,6 +51,7 @@
     <Compile Include="Implementations\BookService.cs" />
     <Compile Include="Implementations\BookTransactionService.cs" />
     <Compile Include="Implementations\EventService.cs" />
+    <Compile Include="Implementations\ExceptionLoggerService.cs" />
     <Compile Include="Implementations\HomeworkService.cs" />
     <Compile Include="Implementations\ImageFileTypeService.cs" />
     <Compile Include="Implementations\ImageFileUrlService.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Interfaces\IBookService.cs" />
     <Compile Include="Interfaces\IBookTransactionService.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
+    <Compile Include="Interfaces\IExceptionLoggerService.cs" />
     <Compile Include="Interfaces\IHomeworkService.cs" />
     <Compile Include="Interfaces\IImageFileTypeService.cs" />
     <Compile Include="Interfaces\IImageFileUrlService.cs" />
